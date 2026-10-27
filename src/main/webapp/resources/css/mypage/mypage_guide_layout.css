@@ -1,0 +1,71 @@
+/* =========================================================
+주제: 파일 역할
+설명: mypage_guide_layout 화면의 레이아웃, 색상, 크기, 반응형 스타일을 정의
+========================================================= */
+
+/* ============================================================
+   가이드 예약 목록 전용 CSS. 다른 마이페이지 탭은 변경하지 않습니다.
+   최소 너비에서 셀을 세로로 쪼개는 대신 표 내부만 가로 스크롤.
+   ============================================================ */
+#guide-area { min-width: 0; width: 100%; }
+#guide-area .summary-boxes {
+  display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 10px;
+}
+#guide-area .summary-box { min-width: 0; }
+#guide-area .summary-box > span { white-space: nowrap; }
+#guide-area .guide-table-scroll {
+  width: 100%; max-width: 100%; overflow-x: auto; overflow-y: hidden;
+  -webkit-overflow-scrolling: touch; border-radius: 8px;
+}
+#guide-area .guide-table-scroll:focus-visible { outline: 2px solid #5b5cf0; outline-offset: 2px; }
+#guide-area .guide-table {
+  width: 100%; min-width: 930px; table-layout: fixed;
+  border-collapse: collapse; font-size: 13px;
+}
+#guide-area .guide-table .col-order { width: 21%; }
+#guide-area .guide-table .col-guide { width: 15%; }
+#guide-area .guide-table .col-date { width: 11%; }
+#guide-area .guide-table .col-count { width: 6%; }
+#guide-area .guide-table .col-price { width: 12%; }
+#guide-area .guide-table .col-status { width: 11%; }
+#guide-area .guide-table .col-approved { width: 15%; }
+#guide-area .guide-table .col-action { width: 9%; }
+#guide-area .guide-table thead th, #guide-area .guide-table tbody td {
+  box-sizing: border-box; padding: 14px 8px; vertical-align: middle;
+  white-space: nowrap; word-break: keep-all; overflow-wrap: normal;
+}
+#guide-area .guide-table thead th { font-size: 13px; }
+#guide-area .guide-table .guide-order { min-width: 0; color:#64748b; }
+#guide-area .guide-table .guide-order > span {
+  display: block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+  font-variant-numeric: tabular-nums;
+}
+#guide-area .guide-table .guide-cell {
+  display: flex; flex-direction: row; align-items: center; gap: 8px; min-width: 0;
+}
+#guide-area .guide-table .guide-cell img {
+  width: 36px; height: 36px; flex: 0 0 36px; border-radius: 50%; object-fit: cover;
+}
+#guide-area .guide-table .guide-cell > div { min-width: 0; max-width: 100%; }
+#guide-area .guide-table .guide-cell b,
+#guide-area .guide-table .guide-cell span {
+  display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+#guide-area .guide-table .guide-state .status {
+  display: inline-flex; align-items:center; justify-content:center;
+  white-space: nowrap; word-break: keep-all; font-size: 12px; padding: 5px 8px;
+}
+#guide-area .guide-table .guide-action .btn { white-space: nowrap; padding: 7px 8px; }
+#guide-area .guide-table .guide-date,
+#guide-area .guide-table .guide-approved,
+#guide-area .guide-table .guide-money { font-variant-numeric: tabular-nums; }
+/* 기존 공통 CSS의 모바일 열 숨기기 규칙은 이 표에만 적용하지 않음 */
+@media (max-width: 600px) {
+  #guide-area .summary-boxes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #guide-area .guide-table .hide-mobile { display: table-cell !important; }
+  #guide-area .guide-table { min-width: 930px; }
+}
+/* 상세 카드 안의 긴 주문번호는 줄바꿈을 허용해 화면 밖으로 나가지 않게 처리 */
+#guide-area .guide-table .detail-row td { white-space: normal; }
+#guide-area .guide-table .detail-row .detail-box { white-space: normal; }
+#guide-area .guide-table .detail-row dd { overflow-wrap: anywhere; }

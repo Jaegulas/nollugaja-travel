@@ -1,0 +1,37 @@
+/* =========================================================
+주제: 파일 역할
+설명: shareItinerary 화면의 레이아웃, 색상, 크기, 반응형 스타일을 정의
+========================================================= */
+
+@import url("../chatbot/newconversation.css");
+  /* 공유 페이지 전용 - 간단하게 */
+  body {
+    margin: 0;
+    background: #f8f7fd;
+    font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+  }
+  .share-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 30px 16px 50px;
+  }
+  .share-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .share-top a {
+    color: #4f46e5;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .share-btn {
+    padding: 8px 14px;
+    border: 1px solid #4f46e5;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #4f46e5;
+    font-family: inherit;
+    cursor: pointer;
+  }

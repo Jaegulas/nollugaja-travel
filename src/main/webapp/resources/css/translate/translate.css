@@ -1,0 +1,176 @@
+/* =========================================================
+주제: 파일 역할
+설명: translate 화면의 레이아웃, 색상, 크기, 반응형 스타일을 정의
+========================================================= */
+
+@charset "UTF-8";
+
+/* ================================
+   언어 선택 메뉴 전체
+================================ */
+.language-menu {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    font-family: "Noto Sans KR", sans-serif;
+    z-index: 1000;
+}
+
+/* ================================
+   현재 선택된 언어 버튼
+================================ */
+.language-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    padding: 9px 12px;
+    background: transparent;
+    color: #333;
+
+    border: 1px solid transparent;
+    border-radius: 8px;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.language-toggle:hover {
+    background: #f5f6f8;
+}
+
+.language-toggle:focus-visible {
+    outline: 2px solid #006574;
+    outline-offset: 2px;
+}
+
+/* 지구본 아이콘 */
+.language-toggle .globe-icon {
+    width: 21px;
+    height: 21px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 21px;
+    line-height: 1;
+}
+
+/* 아래쪽 화살표 */
+.language-toggle .arrow-icon {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+
+    border-right: 1.7px solid #555;
+    border-bottom: 1.7px solid #555;
+
+    transform: rotate(45deg);
+    transition: transform 0.2s ease;
+    margin-left: 2px;
+    margin-top: -4px;
+}
+
+/* 드롭다운 열릴 때 화살표 회전 */
+.language-menu:has(.language-dropdown.active)
+.language-toggle .arrow-icon {
+    transform: rotate(225deg);
+    margin-top: 4px;
+}
+
+/* ================================
+   펼쳐지는 언어 목록
+================================ */
+.language-dropdown {
+    display: none;
+
+    position: absolute;
+    top: calc(100% + 7px);
+    right: 0;
+
+    width: 145px;
+    max-height: 220px;
+    overflow-y: auto;
+
+    padding: 7px 5px;
+
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 9px;
+
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.10);
+
+    z-index: 9999;
+}
+
+/* 메뉴 열림 */
+.language-dropdown.active {
+    display: block;
+}
+
+/* ================================
+   언어 목록 버튼
+================================ */
+.language-dropdown button {
+    display: block;
+    width: 100%;
+
+    padding: 10px 12px;
+
+    border: none;
+    border-radius: 5px;
+
+    background: transparent;
+    color: #4b5563;
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 400;
+    text-align: left;
+
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+/* 마우스 올렸을 때 */
+.language-dropdown button:hover {
+    background: #f3f5f9;
+    color: #004b57;
+}
+
+/* 현재 선택된 언어 */
+.language-dropdown button.selected {
+    background: #edf7f8;
+    color: #005361;
+    font-weight: 600;
+}
+
+/* 스크롤바 */
+.language-dropdown::-webkit-scrollbar {
+    width: 5px;
+}
+
+.language-dropdown::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.language-dropdown::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+/* 모바일 */
+@media (max-width: 768px) {
+    .language-toggle {
+        padding: 8px;
+        font-size: 13px;
+    }
+
+    .language-dropdown {
+        width: 135px;
+    }
+}

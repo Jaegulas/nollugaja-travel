@@ -1,0 +1,500 @@
+/* =========================================================
+주제: 파일 역할
+설명: chat 화면의 레이아웃, 색상, 크기, 반응형 스타일을 정의
+========================================================= */
+
+@charset "UTF-8";
+
+/* =========================
+       놀러가자 AI 챗봇
+       ========================= */
+.noleo-chatbot-root {
+	position: fixed;
+	right: 24px;
+	bottom: 24px;
+	z-index: 9999;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	font-family: "Plus Jakarta Sans", "Noto Sans KR", sans-serif;
+}
+
+.noleo-chat-window {
+	width: 390px;
+	height: 580px;
+	max-height: 85vh;
+	display: none;
+	flex-direction: column;
+	margin-bottom: 16px;
+	overflow: hidden;
+	background: #ffffff;
+	border: 1px solid #e2e7ed;
+	border-radius: 24px;
+	box-shadow: 0 16px 45px rgba(19, 27, 46, 0.18);
+}
+
+.noleo-chat-window.open {
+	display: flex;
+}
+
+.noleo-chat-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 16px 20px;
+	color: #ffffff;
+	background: linear-gradient(135deg, #006574, #008092);
+}
+
+.noleo-chat-header-left {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.noleo-bot-avatar {
+	width: 40px;
+	height: 40px;
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.18);
+	border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.noleo-bot-avatar .material-symbols-outlined {
+	font-size: 25px;
+}
+
+.noleo-chat-title {
+	margin: 0;
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 1;
+}
+
+.noleo-chat-subtitle {
+	margin: 5px 0 0;
+	color: rgba(255, 255, 255, 0.82);
+	font-size: 12px;
+}
+
+.noleo-live-badge {
+	display: inline-block;
+	margin-left: 6px;
+	padding: 3px 6px;
+	border-radius: 5px;
+	background: rgba(255, 255, 255, 0.25);
+	font-size: 10px;
+	font-weight: 700;
+}
+
+.noleo-header-buttons {
+	display: flex;
+	gap: 4px;
+}
+
+.noleo-icon-button {
+	width: 32px;
+	height: 32px;
+	padding: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 0;
+	border-radius: 50%;
+	color: rgba(255, 255, 255, 0.85);
+	background: transparent;
+	cursor: pointer;
+}
+
+.noleo-icon-button:hover {
+	color: #ffffff;
+	background: rgba(255, 255, 255, 0.12);
+}
+
+.noleo-chat-messages {
+	flex: 1;
+	overflow-y: auto;
+	padding: 16px;
+	background: #fafcff;
+}
+
+.noleo-chat-messages::-webkit-scrollbar {
+	width: 5px;
+}
+
+.noleo-chat-messages::-webkit-scrollbar-thumb {
+	background: #cbd5dc;
+	border-radius: 10px;
+}
+
+.noleo-message {
+	display: flex;
+	align-items: flex-start;
+	gap: 10px;
+	margin-bottom: 14px;
+}
+
+.noleo-message.user {
+	justify-content: flex-end;
+}
+
+.noleo-message-bot-icon {
+	width: 28px;
+	height: 28px;
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 2px;
+	border-radius: 50%;
+	color: #006574;
+	background: #e7f5f7;
+}
+
+.noleo-message-bot-icon .material-symbols-outlined {
+	font-size: 17px;
+}
+
+.noleo-message-content {
+	max-width: 82%;
+}
+
+.noleo-message.user .noleo-message-content {
+	max-width: 80%;
+}
+
+.noleo-message-bubble {
+	padding: 12px;
+	color: #131b2e;
+	background: #ffffff;
+	border: 1px solid #e2e7ed;
+	border-radius: 16px;
+	line-height: 1.55;
+	font-size: 14px;
+	word-break: break-word;
+	box-shadow: 0 1px 4px rgba(19, 27, 46, 0.05);
+}
+
+.noleo-message.user .noleo-message-bubble {
+	color: #ffffff;
+	background: #006574;
+	border-color: #006574;
+	border-top-right-radius: 4px;
+}
+
+.noleo-message-time {
+	display: block;
+	margin-top: 4px;
+	padding: 0 4px;
+	color: #7b8790;
+	font-size: 11px;
+}
+
+.noleo-message.user .noleo-message-time {
+	text-align: right;
+}
+
+.noleo-suggestions {
+	padding-left: 38px;
+	margin-bottom: 12px;
+}
+
+.noleo-suggestions-title {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	margin: 0 0 6px;
+	color: #7b8790;
+	font-size: 12px;
+	font-weight: 700;
+}
+
+.noleo-suggestion-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+}
+
+.noleo-suggestion-btn {
+	padding: 6px 12px;
+	color: #4d5961;
+	background: #f2f5f7;
+	border: 1px solid #e2e7ed;
+	border-radius: 999px;
+	font-size: 12px;
+	text-align: left;
+	cursor: pointer;
+}
+
+.noleo-suggestion-btn:hover {
+	color: #006574;
+	background: #e6f3f5;
+}
+
+.noleo-chat-footer {
+	padding: 12px;
+	background: #ffffff;
+	border-top: 1px solid #e2e7ed;
+}
+
+.noleo-chat-form {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.noleo-input-wrap {
+	flex: 1;
+	padding: 7px 12px;
+	border: 1px solid #e2e7ed;
+	border-radius: 16px;
+	background: #f4f6f8;
+}
+
+.noleo-input-wrap:focus-within {
+	border-color: #006574;
+	background: #ffffff;
+}
+
+.noleo-chat-input {
+	width: 100%;
+	padding: 4px 0;
+	border: 0;
+	outline: 0;
+	color: #131b2e;
+	background: transparent;
+	font-size: 14px;
+}
+
+.noleo-chat-input::placeholder {
+	color: #8a969d;
+}
+
+.noleo-send-button {
+	width: 40px;
+	height: 40px;
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 0;
+	border-radius: 14px;
+	color: #ffffff;
+	background: #006574;
+	cursor: pointer;
+}
+
+.noleo-send-button:hover {
+	background: #008092;
+}
+
+.noleo-footer-info {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 8px;
+	padding: 0 4px;
+	color: #7b8790;
+	font-size: 11px;
+}
+
+.noleo-online {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.noleo-online-dot {
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background: #00855b;
+}
+
+.noleo-floating-area {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.noleo-tooltip {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	padding: 8px 14px;
+	color: #ffffff;
+	background: #131b2e;
+	border-radius: 16px;
+	box-shadow: 0 8px 25px rgba(19, 27, 46, 0.2);
+	font-size: 13px;
+	font-weight: 700;
+	cursor: pointer;
+}
+
+.noleo-tooltip-badge {
+	padding: 3px 6px;
+	color: #ffffff;
+	background: #fd6e58;
+	border-radius: 5px;
+	font-size: 11px;
+}
+
+.noleo-chat-trigger {
+	position: relative;
+	width: 64px;
+	height: 64px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 2px solid rgba(255, 255, 255, 0.8);
+	border-radius: 50%;
+	color: #ffffff;
+	border: 3px solid #FFFFFF;
+	background: linear-gradient(135deg, #FFC857, #F59E0B);
+	box-shadow: 0 8px 28px rgba(245, 158, 11, 0.45);
+	cursor: pointer;
+	transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.noleo-chat-trigger:hover {
+	transform: scale(1.05);
+	box-shadow: 0 10px 32px rgba(245, 158, 11, 0.6);
+}
+
+.noleo-chat-trigger:active {
+	transform: scale(.95);
+}
+
+.noleo-chat-trigger .material-symbols-outlined {
+	font-size: 32px;
+}
+
+.noleo-online-ping {
+	position: absolute;
+	top: 3px;
+	right: 3px;
+	width: 15px;
+	height: 15px;
+	border: 2px solid #ffffff;
+	border-radius: 50%;
+	background: #00855b;
+}
+
+.noleo-typing {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	padding: 12px;
+	color: #66737c;
+	background: #f2f5f7;
+	border: 1px solid #e2e7ed;
+	border-radius: 16px;
+	font-size: 12px;
+}
+
+.noleo-typing-dot {
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background: #006574;
+	animation: noleoPulse 1s infinite;
+}
+
+.noleo-typing-dot:nth-child(2) {
+	animation-delay: .15s;
+}
+
+.noleo-typing-dot:nth-child(3) {
+	animation-delay: .3s;
+}
+
+@
+keyframes noleoPulse { 0%, 80%, 100% {
+	opacity: .3;
+	transform: translateY(0);
+}
+
+40
+ 
+%
+{
+opacity
+ 
+:
+ 
+1
+;
+
+	
+	
+	
+transform
+ 
+:
+ 
+translateY
+(
+-2px
+)
+;
+
+	
+	
+	
+}
+}
+@media ( max-width : 600px) {
+	.noleo-chatbot-root {
+		right: 12px;
+		bottom: 12px;
+	}
+	.noleo-chat-window {
+		width: calc(100vw - 24px);
+		height: min(580px, 80vh);
+	}
+	.noleo-tooltip {
+		display: none;
+	}
+}
+
+/* 챗봇 캐릭터 이미지 */
+.noleo-chat-trigger .noleo-chatbot-image {
+	width: 46px;
+	height: 46px;
+	object-fit: contain;
+	display: block;
+	border-radius: 50%;
+}
+
+.noleo-message-bot-icon {
+	width: 45px;
+	height: 45px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	overflow: hidden;
+}
+
+.chatbot-icon-img {
+	width: 52px;
+	height: 52px;
+	object-fit: contain;
+}
+
+/* Additional live-chat styles. Existing floating banner/image styling remains untouched. */
+.noleo-chat-window .noleo-message-name { font-size:12px; font-weight:700; margin-bottom:4px; color:#006574; }
+.noleo-chat-window .noleo-message.user .noleo-message-name { text-align:right; }
+.noleo-chat-window .noleo-system-note { margin:10px 0; font-size:12px; color:#6b7785; text-align:center; }
+.noleo-chat-window .noleo-chat-input:disabled { opacity:.6; cursor:not-allowed; }
+.noleo-chat-window .noleo-send-button:disabled { opacity:.5; cursor:not-allowed; }
+
+/* Live message icon */
+.noleo-chat-trigger { background: linear-gradient(135deg,#007d8d,#14b8a6); box-shadow:0 8px 28px rgba(0,125,141,.32); }
+.noleo-chat-trigger:hover { box-shadow:0 10px 32px rgba(0,125,141,.45); }
+.noleo-chat-trigger .noleo-chatbot-image { width:48px;height:48px;object-fit:contain; }
+.noleo-bot-avatar img {object-fit:contain;}

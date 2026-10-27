@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>Travel_project</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.xhtml</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.xhtml</welcome-file>
+  </welcome-file-list>
+  
+  	<filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <!-- 이미 다른 인코딩 설정이 되어있어도 UTF-8로 강제 덮어쓸지 여부 -->
+            <param-name>ignore</param-name>
+            <param-value>false</param-value>
+        </init-param>
+    </filter>
+
+    <!-- 2. 모든 요청(/*)에 필터 매핑 -->
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+    <error-page>
+    <error-code>400</error-code>
+    <location>/WEB-INF/error/common_error.jsp</location>
+	</error-page>
+	<error-page>
+	    <error-code>401</error-code>
+	    <location>/WEB-INF/error/common_error.jsp</location>
+	</error-page>
+	<error-page>
+	    <error-code>409</error-code>
+	    <location>/WEB-INF/error/common_error.jsp</location>
+	</error-page>
+	<error-page>
+	    <error-code>413</error-code>
+	    <location>/WEB-INF/error/common_error.jsp</location>
+	</error-page>
+	<error-page>
+	    <error-code>502</error-code>
+	    <location>/WEB-INF/error/common_error.jsp</location>
+	</error-page>
+	<error-page>
+	    <error-code>503</error-code>
+	    <location>/WEB-INF/error/common_error.jsp</location>
+	</error-page>
+    
+	<error-page>
+	  <error-code>403</error-code>
+	  <location>/WEB-INF/error/403.jsp</location>
+	</error-page>
+	
+	<error-page>
+	    <error-code>404</error-code>
+	    <location>/WEB-INF/error/404.jsp</location>
+	</error-page>
+	
+	
+	<error-page>
+	    <error-code>500</error-code>
+	    <location>/WEB-INF/error/500.jsp</location>
+	</error-page>
+	
+	<error-page>
+	  <exception-type>java.lang.Exception</exception-type>
+	  <location>/WEB-INF/error/500.jsp</location>
+	</error-page>
+	  
+</web-app>

@@ -1,0 +1,230 @@
+/* =========================================================
+주제: 파일 역할
+설명: mypage_review 화면의 레이아웃, 색상, 크기, 반응형 스타일을 정의
+========================================================= */
+
+/* =========================================
+   내 리뷰 디자인 (mypage.css 맨 아래에 붙여넣기)
+   색은 mypage.css 의 :root 변수를 그대로 사용
+     --main, --main-light, --text, --text-sub, --line, --white
+
+   ★ 기존 파일에서 바뀐 곳 (찾기 쉽게 "추가" "수정" 표시)
+     1. .rv-loading       추가 : "불러오는 중..." 글자
+     2. .rv-text          수정 : 아주 긴 영어/주소도 칸 밖으로 안 나가게
+     3. .rv-card          수정 : 사진 없는 카드 배경을 크림색 계열로
+     4. .rv-photo img     수정 : 사진이 늦게 떠도 칸 높이 유지
+   ========================================= */
+
+/* ---------- 공통 ---------- */
+
+/* [추가] 불러오는 중 */
+.rv-loading {
+  padding: 40px 0;
+  text-align: center;
+  color: var(--text-sub);
+  font-size: 14px;
+}
+
+.rv-title {
+  display: block;
+  margin: 6px 0 8px;
+  color: var(--text);
+  font-size: 17px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.rv-title:hover { color: var(--main); }
+
+/* 리뷰 본문 : 처음엔 4줄까지만 보이기 */
+.rv-text {
+  margin: 0;
+  color: #4b5563;
+  font-size: 15px;
+  line-height: 1.7;
+  white-space: pre-line;          /* 줄바꿈(엔터) 그대로 보이기 */
+  overflow-wrap: break-word;      /* [수정] 띄어쓰기 없는 긴 글자도 줄바꿈 */
+  display: -webkit-box;
+  -webkit-line-clamp: 4;          /* ← 보이는 줄 수 (숫자만 바꾸면 됨) */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+/* 더보기 누르면 전체 보이기 */
+.rv-text.open {
+  display: block;
+}
+
+.rv-more {
+  margin-top: 4px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--main);
+  font-size: 14px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.rv-meta {
+  margin-top: 12px;
+  color: var(--text-sub);
+  font-size: 13px;
+}
+.rv-meta span { margin-right: 12px; }
+
+.rv-photo {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  background: #e5e7eb;            /* 사진 뜨기 전 회색 칸 */
+}
+.rv-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;               /* [수정] 사진이 늦게 떠도 칸 높이 그대로 */
+  object-fit: cover;
+}
+/* 사진 위 "📷 3" */
+.rv-photo-count {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  padding: 3px 9px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #ffffff;
+  font-size: 12px;
+}
+/* 사진 위 분류 뱃지 */
+.rv-badge {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  background: var(--white);
+  color: var(--main);
+  font-size: 12px;
+  font-weight: 700;
+}
+/* 글 옆 분류 뱃지 */
+.rv-badge-inline {
+  display: inline-block;
+  padding: 3px 9px;
+  border-radius: 6px;
+  background: var(--main-light);
+  color: var(--main);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+
+/* =========================================
+   디자인 1 : 큰 사진 카드 (2열)
+   ========================================= */
+.review-card-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  align-items: start;     /* 한 카드가 길어져도 옆 카드는 그대로 */
+}
+.rv-card {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--white);
+}
+.rv-card .rv-photo { height: 240px; }   /* ← 사진 높이 */
+.rv-card .rv-body  { padding: 16px 18px 18px; }
+
+/* 사진 없는 카드 : 위쪽에 메인색 선 + 연한 배경 */
+.rv-card.no-photo {
+  border-top: 4px solid var(--main);
+  background: var(--main-light);        /* [수정] 파란빛 #fbfbff → 메인색의 연한 색 */
+}
+.rv-card.no-photo .rv-body { padding: 20px 20px 18px; }
+.rv-card.no-photo .rv-badge-inline {
+  background: var(--white);             /* 배경이 연한 색이라 뱃지는 흰색으로 */
+}
+
+
+/* =========================================
+   디자인 2 : 매거진 (왼쪽 큰 사진 + 오른쪽 글)
+   ========================================= */
+.rv-mag {
+  display: flex;
+  gap: 24px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+}
+.rv-mag:first-child { padding-top: 0; }
+.rv-mag .rv-photo {
+  flex-shrink: 0;
+  width: 320px;                         /* ← 사진 너비 */
+  height: 220px;                        /* ← 사진 높이 */
+  border-radius: 14px;
+}
+.rv-mag .rv-body {
+  flex: 1;
+  min-width: 0;
+}
+
+
+/* =========================================
+   디자인 3 : 피드 (가운데 한 줄 + 사진 옆으로 넘겨보기)
+   ========================================= */
+.review-feed-list {
+  max-width: 680px;
+  margin: 0 auto;
+}
+.rv-feed {
+  margin-bottom: 24px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--white);
+}
+.rv-feed-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 18px;
+}
+.rv-date { color: var(--text-sub); font-size: 13px; }
+
+/* 사진 여러 장을 가로로 → 손가락/스크롤로 넘겨보기 */
+.rv-photos {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;   /* 한 장씩 딱딱 멈추기 */
+  background: #e5e7eb;
+}
+.rv-photos img {
+  flex: 0 0 100%;                  /* 한 장이 전체 폭 */
+  height: 380px;                   /* ← 사진 높이 */
+  object-fit: cover;
+  scroll-snap-align: start;
+}
+.rv-feed .rv-body { padding: 14px 18px 18px; }
+
+/* 사진 없는 피드 : 글 앞에 왼쪽 선 */
+.rv-feed.no-photo .rv-body {
+  margin: 0 18px 18px;
+  padding: 4px 0 0 16px;
+  border-left: 4px solid var(--main-light);
+}
+
+
+/* =========================================
+   휴대폰 화면
+   ========================================= */
+@media (max-width: 700px) {
+  .review-card-list { grid-template-columns: 1fr; }
+  .rv-card .rv-photo { height: 200px; }
+
+  .rv-mag { flex-direction: column; gap: 12px; }
+  .rv-mag .rv-photo { width: 100%; height: 200px; }
+
+  .rv-photos img { height: 260px; }
+}

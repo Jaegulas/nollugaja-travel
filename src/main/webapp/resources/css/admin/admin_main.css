@@ -1,0 +1,998 @@
+/* =========================================================
+주제: 파일 역할
+설명: admin_main 화면의 레이아웃, 색상, 크기, 반응형 스타일을 정의
+========================================================= */
+
+/* =========================================
+   색상 모음 : 여기 값만 바꾸면 전체 색이 바뀝니다
+   ========================================= */
+:root {
+  --bg: #fdf6ef;          /* 페이지 배경 (연한 베이지) */
+  --menu-bg: #ece6e0;     /* 메뉴 바 배경 */
+  --menu-text: #4a4038;   /* 메뉴 글자 */
+  --point: #a0401a;       /* 포인트 (갈색) */
+  --green: #0f4c3a;       /* 선택된 월 버튼 배경 (진초록) */
+  --chip: #efebe7;        /* 월 버튼 기본 배경 */
+  --line: #e2dcd5;        /* 테두리 선 */
+
+  /* ----- 예약 상태 색 (상태 버튼 = 목록 줄 같은 색) ----- */
+  --all-bg:  #f1ece6;  --all-bd:  #cbbfb2;  --all-tx:  #5a4d42;   /* 전체 : 베이지 */
+  --paid-bg: #e6f2ea;  --paid-bd: #9cc8ad;  --paid-tx: #2f6b4a;   /* 결제완료 : 연한 초록 */
+  --pend-bg: #fff6dc;  --pend-bd: #e6c25a;  --pend-tx: #9a6700;   /* 결제대기 : 연한 노랑 */
+  --canc-bg: #f6f6f6;  --canc-bd: #d0d0d0;  --canc-tx: #999999;   /* 결제취소 : 연한 회색 */
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+  color: #333;
+}
+
+/* 관리자 내용만 가운데 + 폭 제한 */
+.admin-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+
+/* =========================================
+   1. 제목 영역
+   ========================================= */
+.admin-title {
+  text-align: center;
+  margin: 8px 0 20px;
+}
+
+/* 위쪽 작은 뱃지 */
+.admin-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #e8f0ec;
+  color: var(--green);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.admin-badge svg {
+  width: 13px;
+  height: 13px;
+}
+
+.admin-title h1 {
+  margin: 10px 0 6px;
+  font-size: 24px;
+  font-weight: 800;
+  color: #2b2520;
+}
+
+/* 설명 한 줄 */
+.admin-desc {
+  margin: 0;
+  font-size: 13px;
+  color: #8a7f75;
+}
+
+
+/* =========================================
+   2. 메뉴 (알약 모양 탭)
+   <a> 와 리뷰용 <button> 을 똑같이 보이게
+   ========================================= */
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  width: fit-content;
+  margin: 0 auto 20px;
+  gap: 4px;
+  padding: 5px;
+  background: var(--menu-bg);
+  border-radius: 999px;
+}
+
+/* 리뷰 메뉴를 감싼 form */
+.menu form {
+  margin: 0;
+}
+
+.menu a,
+.menu button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  color: var(--menu-text);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* button 기본 모양 없애기 */
+.menu button {
+  border: none;
+  background: none;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.menu a:hover,
+.menu button:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* 지금 보고 있는 메뉴 : class="active" */
+.menu a.active,
+.menu button.active {
+  background: #fff;
+  color: var(--point);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.menu svg {
+  width: 15px;
+  height: 15px;
+}
+
+
+/* =========================================
+   3. 조회 박스 (년도 / 월)
+   ========================================= */
+.filter {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 14px 16px;
+}
+
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 두 번째 줄부터 위에 점선 */
+.filter-row + .filter-row {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--line);
+}
+
+/* "년도", "월" 글자 */
+.filter-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 50px;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+/* 년도 선택 */
+.filter select {
+  height: 32px;
+  padding: 0 34px 0 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  background: var(--chip) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23555' stroke-width='3'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center;
+  appearance: none;
+  cursor: pointer;
+}
+
+/* 월 버튼 묶음 : 남는 폭을 다 쓰고, 넘치면 이 안에서만 줄바꿈 */
+.month-list {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* 월 버튼 하나 */
+.month {
+  display: inline-flex;
+}
+
+/* 진짜 라디오는 숨기고 .chip 을 버튼처럼 보여줌 */
+.month input {
+  position: absolute;
+  opacity: 0;
+}
+
+.month .chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 12px 0 8px;
+  border-radius: 999px;
+  background: var(--chip);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.month .chip:hover {
+  background: #e4ded8;
+}
+
+/* 동그라미 */
+.radio-mark {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid #bbb;
+  background: #fff;
+}
+
+/* 선택됐을 때 */
+.month input:checked + .chip {
+  background: var(--green);
+  color: #fff;
+}
+
+.month input:checked + .chip .radio-mark {
+  border-color: #fff;
+}
+
+.month input:checked + .chip .radio-mark::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+}
+
+/* 조회하기 버튼 (월 줄 오른쪽 끝) */
+.btn-search {
+  flex-shrink: 0;
+  margin-left: auto;
+  height: 36px;
+  padding: 0 22px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--point);
+  border: none;
+  border-radius: 999px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.btn-search:hover {
+  opacity: 0.9;
+}
+
+/* 잘못된 년/월 값 안내 문구 */
+.error-msg {
+  margin: 12px 0 0;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--point);
+  background: #f6e9e2;
+  border-radius: 10px;
+}
+
+/* 목록이 비었을 때 (회원/리뷰 공통) */
+.empty {
+  width: 100%;
+  margin: 20px 0 0;
+  padding: 50px 0;
+  text-align: center;
+  color: #999;
+  background: #fff;
+  border: 1px dashed var(--line);
+  border-radius: 14px;
+}
+
+
+/* =========================================
+   4. 회원목록 표
+   ========================================= */
+.table-wrap {
+  width: 100%;
+  margin-top: 20px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow-x: auto;       /* 표가 넓으면 상자 안에서만 옆으로 스크롤 */
+}
+
+.member-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.member-table th {
+  padding: 14px 16px;
+  background: #f7f3ee;
+  color: #555;
+  font-weight: 700;
+  text-align: left;
+  border-bottom: 2px solid var(--line);
+}
+
+.member-table td {
+  padding: 13px 16px;
+  color: #333;
+  border-bottom: 1px solid #f0ebe5;
+}
+
+.member-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.member-table tbody tr:hover {
+  background: #fcf8f3;
+}
+
+.member-table .num  { color: #999; }
+.member-table .name { font-weight: 700; }
+.member-table .date { color: #888; }
+
+
+/* =========================================
+   5. 리뷰글 목록 (클릭하면 아래로 펼쳐짐)
+   ========================================= */
+.review-list {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* 글 하나 */
+.review-item {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+/* 펼쳐진 글은 테두리 초록 */
+.review-item[open] {
+  border-color: var(--green);
+}
+
+/* 클릭하는 제목줄 */
+.review-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  font-size: 14px;
+  cursor: pointer;
+  list-style: none;       /* 기본 ▶ 없애기 */
+}
+
+.review-head::-webkit-details-marker {
+  display: none;          /* 크롬/사파리 기본 ▶ 없애기 */
+}
+
+.review-head:hover {
+  background: #fcf8f3;
+}
+
+/* 오른쪽 끝 화살표 */
+.review-head::after {
+  content: "▾";
+  color: #aaa;
+}
+
+.review-item[open] .review-head::after {
+  content: "▴";
+}
+
+/* 카테고리 뱃지 */
+.review-cat {
+  flex-shrink: 0;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: #e8f0ec;
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* 제목 (길면 ... 으로 자르기) */
+.review-title {
+  flex: 1;
+  font-weight: 700;
+  color: #2b2520;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 댓글 수 */
+.review-cmt {
+  color: var(--point);
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* 작성자, 조회수, 날짜 */
+.review-meta,
+.review-date {
+  color: #888;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+/* 펼쳐지는 부분 */
+.review-body {
+  padding: 4px 18px 18px;
+  border-top: 1px dashed var(--line);
+}
+
+/* 글 내용 */
+.review-content {
+  margin: 14px 0;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #333;
+  white-space: pre-line;  /* 엔터 친 줄바꿈 그대로 */
+}
+
+/* 댓글 상자 */
+.comment-box {
+  padding: 12px 14px;
+  background: #f7f3ee;
+  border-radius: 10px;
+}
+
+.comment-label {
+  margin: 0 0 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #555;
+}
+
+/* 댓글 하나 */
+.comment-item {
+  padding: 10px 0;
+  border-top: 1px solid #ebe4dc;
+}
+
+.comment-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.comment-id {
+  color: #999;
+}
+
+.comment-date {
+  margin-left: auto;      /* 날짜는 오른쪽 끝 */
+  color: #999;
+  font-size: 12px;
+}
+
+.comment-content {
+  margin: 4px 0 0;
+  font-size: 13px;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.comment-empty {
+  margin: 0;
+  font-size: 13px;
+  color: #999;
+}
+
+
+/* =========================================
+   6. 가이드 예약자현황
+   (색은 맨 위 :root 의 --paid-bg 등에서 바꾸기)
+   ========================================= */
+
+/* ---------- 상태 필터 버튼 (4칸) ---------- */
+.status-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 32px;       /* 조회 박스와 띄우기 */
+}
+
+.status-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;   /* 이름은 왼쪽, 건수는 오른쪽 */
+  padding: 10px 18px;
+  border: 2px solid;
+  border-radius: 14px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.status-btn:hover {
+  filter: brightness(0.97);         /* 마우스 올리면 살짝 어둡게 */
+}
+
+.status-name {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.status-num {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.status-num small {
+  margin-left: 2px;
+  font-size: 14px;
+  font-weight: 600;
+  opacity: 0.7;
+}
+
+/* 버튼별 색 */
+.status-btn.all     { background: var(--all-bg);  border-color: var(--all-bd);  color: var(--all-tx); }
+.status-btn.paid    { background: var(--paid-bg); border-color: var(--paid-bd); color: var(--paid-tx); }
+.status-btn.pending { background: var(--pend-bg); border-color: var(--pend-bd); color: var(--pend-tx); }
+.status-btn.cancel  { background: var(--canc-bg); border-color: var(--canc-bd); color: var(--canc-tx); border-style: dashed; }
+
+/* 선택된 버튼 : 이름 앞에 ✓ */
+.status-btn.on .status-name::before {
+  content: "✓ ";
+}
+
+/* 전체가 아닌 상태를 골랐을 때 : 나머지는 흐리게, 선택된 것만 진하게 */
+.status-grid.pick .status-btn {
+  opacity: 0.45;
+}
+
+.status-grid.pick .status-btn.on {
+  opacity: 1;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.10);
+}
+
+/* ---------- 버튼과 목록 사이 구분선 ---------- */
+.res-divider {
+  margin: 28px 0 24px;
+  border: 0;
+  border-top: 1px solid var(--line);
+}
+
+/* ---------- 예약 목록 ---------- */
+.res-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;              /* 예약끼리 간격 */
+}
+
+/* 예약 하나 (줄 전체를 상태 색으로) */
+.res-item {
+  border: 1px solid var(--line);
+  border-left-width: 5px; /* 왼쪽 굵은 선 */
+  border-radius: 14px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.res-item.paid    { background: var(--paid-bg); border-color: var(--paid-bd); }
+.res-item.pending { background: var(--pend-bg); border-color: var(--pend-bd); }
+.res-item.cancel  { background: var(--canc-bg); border-color: var(--canc-bd); border-style: dashed; border-left-style: solid; }
+
+/* 클릭하는 줄 */
+.res-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  font-size: 15px;
+  cursor: pointer;
+  list-style: none;       /* 기본 ▶ 없애기 */
+}
+
+.res-head::-webkit-details-marker {
+  display: none;          /* 크롬/사파리 기본 ▶ 없애기 */
+}
+
+/* 오른쪽 끝 화살표 */
+.res-head::after {
+  content: "▾";
+  opacity: 0.5;
+}
+
+.res-item[open] .res-head::after {
+  content: "▴";
+}
+
+/* 상태 뱃지 (흰 바탕 + 상태 색 글자, 폭 고정) */
+.res-badge {
+  flex-shrink: 0;
+  width: 76px;
+  padding: 3px 0;
+  text-align: center;
+  border: 1px solid #cfc6bc;
+  border-radius: 999px;
+  background: #fff;
+  color: #8a7f75;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.res-item.paid    .res-badge { color: var(--paid-tx); border-color: var(--paid-bd); }
+.res-item.pending .res-badge { color: var(--pend-tx); border-color: var(--pend-bd); }
+.res-item.cancel  .res-badge { color: var(--canc-tx); border-color: var(--canc-bd); border-style: dashed; }
+
+/* 투어일 */
+.res-date {
+  flex-shrink: 0;
+  width: 96px;
+  font-weight: 800;
+  color: #2b2520;
+}
+
+/* 예약자 · 지역 / 가이드 (길면 ... 으로) */
+.res-title {
+  flex: 1;
+  font-weight: 700;
+  color: #2b2520;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 인원 */
+.res-people {
+  color: #777;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+/* 금액 */
+.res-price {
+  width: 100px;
+  text-align: right;
+  font-weight: 700;
+  color: #2b2520;
+  white-space: nowrap;
+}
+
+/* 결제취소 줄은 글자 흐리게 */
+.res-item.cancel .res-date,
+.res-item.cancel .res-title,
+.res-item.cancel .res-price {
+  color: #aaa;
+}
+
+/* ---------- 펼쳐지는 부분 ---------- */
+.res-body {
+  padding: 4px 18px 18px;
+}
+
+/* 흰 상자 안 4칸 x 2줄 */
+.res-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px 20px;
+  padding: 16px;
+  background: #fff;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;       /* 값은 검은색 + 굵게 */
+  color: #2b2520;
+}
+
+/* 항목 이름 (주문번호, 연락처 ...) : 회색 + 보통 굵기 */
+.res-grid span {
+  display: block;
+  margin-bottom: 3px;
+  color: #999;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+
+ 
+/* =========================================
+   7. 리뷰 카테고리 탭 (배경 그대로 + 아래 기준선)
+   ========================================= */
+.cat-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 32px;                    /* 조회 박스와 띄우기 */
+  border-bottom: 3px solid #d8cfc6;    /* 아래 기준선 */
+}
+ 
+/* 탭 하나 (button 기본 모양 없애기) */
+.cat-tab {
+  position: relative;
+  padding: 12px 16px;
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  color: #9a8f85;
+  cursor: pointer;
+}
+ 
+.cat-tab:hover {
+  color: #2b2520;
+}
+ 
+/* 건수 */
+.cat-tab b {
+  margin-left: 5px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #c2b8ae;
+}
+ 
+/* 선택된 탭 : 검은 굵은 글씨 + 갈색 건수 */
+.cat-tab.on {
+  color: #2b2520;
+  font-weight: 800;
+}
+ 
+.cat-tab.on b {
+  color: var(--point);
+}
+ 
+/* 선택된 탭 초록 밑줄 (기준선 위에 겹쳐 올라감) */
+.cat-tab.on::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: -3px;                        /* 기준선 두께만큼 아래로 */
+  height: 5px;
+  border-radius: 3px 3px 0 0;
+  background: var(--green);
+}
+
+/* ===== 내 여행일정 버튼 색 : B 디자인 =====
+   #tab-plan 을 앞에 붙여서 기존 .btn 규칙보다 강하게 만들었어요.
+   색을 바꿀 땐 background, border, color 값만 고치면 돼요. */
+
+/* PDF : 연한 보라 바탕 + 보라 글자 */
+#tab-plan .btn.btn-pdf {
+  background: #f0eeff;
+  border: 1px solid #f0eeff;      /* 바탕과 같은 색 → 테두리가 안 보임 */
+  color: #4a3fc9;
+}
+#tab-plan .btn.btn-pdf:hover {
+  border-color: #5b4fe0;          /* 마우스 올리면 보라 테두리 */
+}
+
+/* 카톡 공유 : 카카오 노랑 */
+#tab-plan .btn.kakao-share-btn {
+  background: #fee500;
+  border: 1px solid #fee500;
+  color: #3c1e1e;                 /* 카카오 갈색 글자 */
+}
+#tab-plan .btn.kakao-share-btn:hover {
+  background: #f5d800;            /* 조금 진한 노랑 */
+}
+
+/* 삭제 : 평소엔 회색, 마우스 올리면 빨강 */
+#tab-plan .btn.btn-danger {
+  background: #ffffff;
+  border: 1px solid #e3e3e3;
+  color: #888888;
+}
+#tab-plan .btn.btn-danger:hover {
+  background: #fff1f1;
+  border-color: #e5484d;
+  color: #e5484d;
+}
+
+#tab-plan .rv-table th:first-child,
+#tab-plan .rv-table td:first-child { text-align: left; }
+
+/* =========================================
+   8. 페이지 버튼 (예약 · 회원 · 리뷰 공통)
+   ========================================= */
+.pager {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 28px;
+}
+
+.pager-btn {
+  min-width: 36px;
+  height: 36px;
+  padding: 0 10px;
+  border: none;
+  border-radius: 999px;
+  background: var(--chip);
+  color: var(--menu-text);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.pager-btn:hover {
+  background: #e4ded8;
+}
+
+/* 지금 페이지 : 월 버튼처럼 진초록 */
+.pager-btn.on {
+  background: var(--green);
+  color: #fff;
+}
+ 
+ /* =========================================
+   9. 목록 안내 줄 (예약 · 회원 · 리뷰 공통)
+   왼쪽 : 총 n건  1 / 2 페이지   오른쪽 : ↑ 정렬 기준
+   ========================================= */
+.list-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;   /* 양쪽 끝으로 */
+  margin-bottom: 12px;
+}
+
+/* 총 n건 */
+.list-count {
+  font-size: 17px;
+  font-weight: 700;
+  color: #2b2520;
+}
+
+/* 건수 숫자만 갈색 */
+.list-count b {
+  color: var(--point);
+}
+
+/* 1 / 2 페이지 */
+.list-page {
+  margin-left: 6px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #9a8f85;
+}
+
+/* 정렬 기준 : 숫자와 같은 갈색 */
+.list-sort {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--point);
+}
+
+/* 앞에 화살표 (글자와 같은 갈색) */
+.list-sort::before {
+  content: "↑
+}
+
+/* 최신 순처럼 내림차순일 때 화살표 ↓ */
+.list-sort.desc::before {
+  content: "↓ ";
+}
+
+
+/* 리뷰 : 탭 기준선 아래 안내 줄 */
+.review-info {
+  margin-top: 20px;    /* 기준선과 띄우기 */
+}
+
+.review-info + .review-list,
+.review-info + c\:choose .review-list {
+  margin-top: 0;
+}
+ 
+  /* 리뷰 : 탭 기준선 아래 안내 줄 (왼쪽 정렬 기준 / 오른쪽 페이지) */
+.review-info {
+  margin-top: 20px;      /* 기준선과 띄우기 */
+}
+
+.review-info .list-page {
+  margin-left: 0;        /* 오른쪽 끝 혼자 있으니 왼쪽 여백 없애기 */
+}
+
+/* 안내 줄 바로 아래 목록은 위 여백 없애기 */
+.review-info + .review-list {
+  margin-top: 0;
+}
+
+
+
+/* ===== 전체 회원 버튼 ===== */
+.btn-all {
+  margin-left: 8px;
+  padding: 10px 18px;
+  border: 2px solid var(--point);
+  border-radius: 999px;
+  color: var(--point);
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn-all:hover,
+.btn-all.on {
+  background: var(--point);
+  color: #fff;
+}
+
+/* ===== 전체 회원 수 안내 ===== */
+.list-info {
+  margin: 16px 4px 8px;
+  color: var(--menu-text);
+}
+.list-info strong {
+  color: var(--point);
+}
+
+/* ===== 페이지 번호 ===== */
+.paging {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin: 24px 0;
+}
+.paging a,
+.paging .current {
+  min-width: 36px;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  border-radius: 8px;
+  text-decoration: none;
+}
+.paging a {
+  background: var(--chip);
+  color: var(--menu-text);
+}
+.paging a:hover {
+  background: var(--line);
+}
+.paging .current {
+  background: var(--green);
+  color: #fff;
+  font-weight: 700;
+}
+
+
+/* ===== 회원목록 표 위 줄 : 왼쪽 토글, 오른쪽 인원 ===== */
+.member-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 16px 4px 10px;
+}
+
+/* 월별 조회 | 전체 회원 토글 */
+.view-toggle {
+  display: inline-flex;
+  padding: 3px;
+  background: var(--menu-bg);
+  border-radius: 999px;
+}
+.view-toggle a {
+  padding: 7px 16px;
+  border-radius: 999px;
+  color: var(--menu-text);
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+.view-toggle a.on {
+  background: #fff;
+  color: var(--point);
+  font-weight: 700;
+}

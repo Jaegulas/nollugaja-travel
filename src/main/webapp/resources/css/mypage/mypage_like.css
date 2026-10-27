@@ -1,0 +1,266 @@
+/* =========================================================
+주제: 파일 역할
+설명: mypage_like 화면의 레이아웃, 색상, 크기, 반응형 스타일을 정의
+========================================================= */
+
+/* =========================================
+   찜 목록 디자인 (mypage.css 맨 아래에 붙여넣기)
+   색은 mypage.css 의 :root 변수를 그대로 사용
+     --main       : 보라 (선택된 버튼, 분류 글자)
+     --main-light : 연한 보라 (반기 제목 배경)
+     --text       : 진한 글자
+     --text-sub   : 설명 글자
+     --line       : 테두리
+     --white      : 흰색
+   ========================================= */
+
+
+/* ---------- 분류 버튼 (전체 6 / 숙소 2 / ...) ---------- */
+.filter-chips {
+  display: flex;
+  flex-wrap: wrap;               /* 좁은 화면에선 다음 줄로 */
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.filter-chips .chip {
+  padding: 8px 16px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--white);
+  color: var(--text);
+  font-size: 15px;
+  font-family: inherit;
+  cursor: pointer;
+}
+.filter-chips .chip:hover {
+  border-color: var(--main);
+}
+
+/* 선택된 버튼 : 보라 바탕 + 흰 글자 */
+.filter-chips .chip.active {
+  background: var(--main);
+  border-color: var(--main);
+  color: #ffffff;
+  font-weight: 700;
+}
+
+
+/* ---------- 반기 제목 (2026년 하반기 3곳) ---------- */
+.like-group-title {
+  margin: 0 0 16px;
+  padding: 12px 16px;
+  border-left: 4px solid var(--main);   /* 왼쪽 보라 선 */
+  border-radius: 6px;
+  background: var(--main-light);
+  color: var(--main);
+  font-size: 17px;
+  font-weight: 500;
+}
+.like-group-title span {
+  margin-left: 4px;
+  color: var(--text-sub);
+  font-size: 14px;
+}
+
+
+/* ---------- 카드 목록 ---------- */
+.like-grid {
+  display: grid;
+  /* 카드 한 장 최소 220px, 화면 폭에 맞춰 한 줄에 들어가는 만큼 */
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 30px;             /* 다음 반기 묶음과 간격 */
+}
+
+/* 카드 하나 */
+.like-card {
+  position: relative;              /* ♥ 버튼을 카드 위에 띄우기 위해 */
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--white);
+  transition: box-shadow 0.15s, transform 0.15s;
+}
+.like-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* 카드 전체가 링크 */
+.like-card a {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+
+/* ---------- 사진 칸 ---------- */
+.like-photo {
+  position: relative;
+  height: 124px;                   /* ← 사진 높이 */
+  background: #e5e7eb;             /* 사진 뜨기 전 회색 */
+}
+.like-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;               /* 비율 유지하며 칸 꽉 채우기 */
+}
+
+/* 사진이 없을 때 : 회색 칸 가운데 분류 이름 */
+.like-noimg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: #9ca3af;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* 사진 왼쪽 위 "10.14 찜" */
+.like-date {
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  padding: 3px 9px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+
+/* ---------- 글 칸 ---------- */
+.like-info {
+  padding: 12px 12px 14px;
+}
+
+.like-type {
+  color: var(--main);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.like-name {
+  margin: 4px 0;
+  color: var(--text);
+  font-size: 17px;
+  font-weight: 700;
+  white-space: nowrap;             /* 이름이 길면 한 줄로 ... 처리 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.like-addr {
+  color: var(--text-sub);
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* ---------- 찜 해제 ♥ 버튼 (사진 오른쪽 위) ---------- */
+.like-remove {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #e11d48;                  /* 빨간 하트 */
+  font-size: 18px;
+  line-height: 34px;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+.like-remove:hover {
+  background: #ffe4e6;
+}
+.like-remove:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+
+/* ---------- 휴대폰 : 한 줄에 2장 ---------- */
+@media (max-width: 600px) {
+  .like-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .like-photo { height: 100px; }
+  .like-name  { font-size: 15px; }
+}
+
+
+/* =========================================================
+주제: 숙소 이미지 준비중 카드
+설명: 숙소 이미지가 없거나 로드 실패한 경우 숙박 전용 SVG와 안내 문구 표시
+========================================================= */
+.like-photo.accommodation-ready {
+  position: relative;
+  overflow: hidden;
+  background: #111827;
+}
+
+.like-photo.accommodation-ready img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(.78) saturate(.92);
+  transform: scale(1.01);
+}
+
+.like-photo.accommodation-ready::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(7, 15, 28, .05) 0%, rgba(7, 15, 28, .30) 100%);
+  pointer-events: none;
+}
+
+.accommodation-ready-message {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  width: calc(100% - 48px);
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 255, 255, .22);
+  border-radius: 10px;
+  background: rgba(8, 18, 31, .68);
+  box-shadow: 0 5px 16px rgba(0, 0, 0, .24);
+  backdrop-filter: blur(3px);
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;
+}
+
+.accommodation-ready-message strong {
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: -.25px;
+}
+
+.accommodation-ready-message span {
+  color: #9ed9e7;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.like-photo.accommodation-ready .like-date {
+  z-index: 3;
+}

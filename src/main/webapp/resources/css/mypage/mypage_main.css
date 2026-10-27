@@ -1,0 +1,590 @@
+/* =========================================================
+주제: 파일 역할
+설명: mypage_main 화면의 레이아웃, 색상, 크기, 반응형 스타일을 정의
+========================================================= */
+
+/* =========================================
+   마이페이지 CSS
+   색상은 맨 위 :root 만 바꾸면 전체가 바뀝니다
+   ========================================= */
+
+/* mypage_main.css 맨 위 (반드시 첫 줄, 다른 코드보다 위에) */
+/*경로는 페이지 주소가 아니라 mypage_main.css 파일 위치 기준*/
+@import url("../chatbot/newconversation.css");
+@import url("mypage_review.css");
+@import url("mypage_like.css");
+
+:root {
+  --main: #4f46e5;        /* 메인 색 */
+  --main-light: #eef0ff;  /* 연한 메인 색 */
+  --page-bg: #f8f7fd;     /* 페이지 배경 */
+  --tab-bg: #e6e4f7;      /* 탭 묶음 배경 */
+  --line: #e7e5f2;        /* 테두리 선 */
+  --text: #1f2933;        /* 기본 글자 */
+  --text-sub: #6b7c85;    /* 흐린 글자 */
+  --white: #ffffff;
+
+  /* 예약 상태 색 */
+  --wait: #b45309;     --wait-bg: #fef3c7;     /* 예약대기 */
+  --ok: #047857;       --ok-bg: #d1fae5;       /* 예약확정 */
+  --done: #475569;     --done-bg: #e2e8f0;     /* 이용완료 */
+  --cancel: #b91c1c;   --cancel-bg: #fee2e2;   /* 취소 */
+}
+
+body {
+  margin: 0;
+  background: var(--page-bg);
+  color: var(--text);
+  font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+}
+
+/* ---------- 상단 제목 ---------- */
+.mypage-header {
+  text-align: center;
+  padding: 30px 16px 20px;
+}
+.mypage-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: var(--main-light);
+  color: var(--main);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.mypage-title {
+  margin: 14px 0 8px;
+  font-size: 28px;
+  font-weight: 800;
+}
+.mypage-desc {
+  margin: 0;
+  color: var(--text-sub);
+  font-size: 15px;
+}
+
+/* ---------- 탭 ---------- */
+.mypage-tabs {
+  display: inline-flex;
+  gap: 4px;
+  margin-top: 24px;
+  padding: 5px;
+  border-radius: 30px;
+  background: var(--tab-bg);
+}
+.mypage-tab {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 25px;
+  background: transparent;
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+}
+.mypage-tab:hover { color: var(--main); }
+.mypage-tab.active {
+  background: var(--white);
+  color: var(--main);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+.mypage-tab svg,
+.mypage-badge svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ---------- 탭 내용 전체 폭 ---------- */
+.mypage-content {
+  max-width: 1150px;
+  margin: 0 auto 40px;
+}
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ---------- 흰 상자 밖 배너 (탭 제목) ---------- */
+.panel-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;              /* 글자와 개수 표시 사이 간격 */
+  margin-bottom: 14px;
+  padding: 22px 28px;
+  border: 1px solid #d9dcfb;   /* 배너 테두리 (아주 연한 인디고) */
+  border-radius: 16px;
+  background: #e8eaff;         /* 배너 배경 (연한 인디고) */
+}
+.panel-banner h3 {
+  margin: 0 0 4px;
+  font-size: 21px;
+   font-weight: 800;
+  color: var(--main);          /* 제목은 메인 색 */
+}
+.panel-banner p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-sub);      /* 설명은 회색 */
+}
+/* 오른쪽 개수 표시 */
+.panel-count {
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: var(--white);
+  color: var(--main);
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* ---------- 흰 상자 (내용) ---------- */
+.panel-box {
+  padding: 28px 30px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--white);
+  min-height: 260px;
+}
+
+/* 데이터 없을 때 / 불러오는 중 */
+.empty {
+  padding: 50px 0;
+  text-align: center;
+  color: var(--text-sub);
+}
+
+/* ---------- 공통 버튼 ---------- */
+.btn {
+  padding: 7px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+  color: var(--text);
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn:hover { border-color: var(--main); color: var(--main); }
+.btn-main { background: var(--main); border-color: var(--main); color: var(--white); }
+.btn-main:hover { color: var(--white); opacity: 0.9; }
+.btn-danger:hover { border-color: var(--cancel); color: var(--cancel); }
+
+/* ---------- 필터 버튼 (찜 목록 분류) ---------- */
+.filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+.chip {
+  padding: 6px 14px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--white);
+  font-size: 15px;
+  font-family: inherit;
+  cursor: pointer;
+}
+.chip.active {
+  background: var(--main);
+  border-color: var(--main);
+  color: var(--white);
+}
+
+/* =========================================
+   1. 찜 목록 - 작은 카드
+   ========================================= */
+.like-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);  /* 한 줄에 5개 */
+  gap: 14px;
+}
+.like-card {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--white);
+}
+.like-card a {
+  color: inherit;
+  text-decoration: none;
+}
+.like-card img {
+  display: block;
+  width: 100%;
+  height: 110px;
+  object-fit: cover;
+  background: #e5e7eb;
+}
+.like-info { padding: 9px 10px 11px; }
+.like-type {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--main);
+}
+.like-name {
+  margin: 3px 0;
+  font-size: 16px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;   /* 길면 ... 처리 */
+}
+.like-addr {
+  font-size: 13px;
+  color: var(--text-sub);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* 반기 제목 (배너처럼) */
+.like-group-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 26px 0 14px;
+  padding: 10px 14px;
+  border-left: 4px solid var(--main);
+  border-radius: 8px;
+  background: var(--main-light);
+  color: var(--main);
+  font-size: 16px;
+}
+.like-group-title span {
+  color: var(--text-sub);
+  font-size: 13px;
+  font-weight: 500;
+}
+.filter-chips + .like-group-title { margin-top: 0; }  /* 첫 제목은 위 여백 없게 */
+
+/* 사진 + 날짜 상자 */
+.like-photo { position: relative; }
+
+/* 사진 왼쪽 위 찜한 날짜 */
+.like-date {
+  position: absolute;
+  left: 7px;
+  top: 7px;
+  padding: 3px 8px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.55);   /* 반투명 검정 → 어떤 사진에도 잘 보임 */
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* 사진 위 하트 버튼 */
+.like-remove {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  color: #e11d48;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* =========================================
+   2. 가이드 예약 - 요약 + 표 + 펼치기
+   ========================================= */
+.summary-boxes {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.summary-box {
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--white);
+  text-align: left;
+  font-family: inherit;
+  cursor: pointer;
+}
+.summary-box span {
+  display: block;
+  font-size: 14px;
+  color: var(--text-sub);
+}
+.summary-box strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 22px;
+}
+.summary-box.active {
+  border-color: var(--main);
+  background: var(--main-light);
+}
+
+.rv-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.rv-table th {
+  padding: 11px 8px;
+  border-bottom: 2px solid var(--line);
+  background: #f9f9fc;
+  color: var(--text-sub);
+  font-weight: 600;
+  text-align: left;
+}
+.rv-table td {
+  padding: 12px 8px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: middle;
+}
+.rv-no { color: var(--text-sub); }
+
+/* 가이드 사진 + 이름 */
+.guide-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.guide-cell img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #e5e7eb;
+}
+.guide-cell b { display: block; }
+.guide-cell span { font-size: 13px; color: var(--text-sub); }
+
+/* 상태 뱃지 */
+.status {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+}
+.status-wait   { color: var(--wait);   background: var(--wait-bg); }
+.status-ok     { color: var(--ok);     background: var(--ok-bg); }
+.status-done   { color: var(--done);   background: var(--done-bg); }
+.status-cancel { color: var(--cancel); background: var(--cancel-bg); }
+
+/* 펼쳐진 상세 줄 */
+.detail-row > td {
+  padding: 0;
+  background: #f9f9fc;
+}
+.detail-box { padding: 20px; }
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr 1fr;  /* 가이드 / 투어 / 결제 */
+  gap: 14px;
+}
+.detail-card {
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--white);
+}
+.detail-card h4 {
+  margin: 0 0 12px;
+  font-size: 15px;
+  color: var(--main);
+}
+/* 이름 : 값 목록 */
+.info-list {
+  margin: 0;
+  font-size: 14px;
+}
+.info-list div {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 5px 0;
+  border-bottom: 1px dashed var(--line);
+}
+.info-list dt { color: var(--text-sub); }
+.info-list dd { margin: 0; font-weight: 600; text-align: right; }
+.detail-text {
+  margin: 0 0 10px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-sub);
+}
+
+/* 투어 코스 순서 (세로 타임라인) */
+.course-list {
+  margin: 0 0 12px;
+  padding: 0;
+  list-style: none;
+}
+.course-list li {
+  position: relative;
+  padding: 0 0 12px 22px;
+  font-size: 14px;
+  border-left: 2px solid var(--main-light);
+  margin-left: 6px;
+}
+.course-list li::before {           /* 동그라미 점 */
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--main);
+}
+.course-list li:last-child { border-left-color: transparent; }
+.course-list small { color: var(--text-sub); }
+
+.detail-actions {
+  margin-top: 14px;
+  text-align: right;
+}
+
+/* =========================================
+   3. 내 여행일정 - 목록 + 펼치기
+   ========================================= */
+.plan-item {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+.plan-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+}
+.plan-icon {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: var(--main-light);
+  color: var(--main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+.plan-main { flex: 1; min-width: 0; }
+.plan-main b { display: block; font-size: 15px; }
+.plan-main span { font-size: 13px; color: var(--text-sub); }
+.plan-btns { display: flex; gap: 6px; }
+
+.plan-body {
+  display: none;            /* 기본은 닫힘 */
+  padding: 16px;
+  border-top: 1px solid var(--line);
+  background: #f9f9fc;
+}
+.plan-item.open .plan-body { display: block; }
+
+.day-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  background: var(--white);
+}
+.day-table th,
+.day-table td {
+  padding: 9px 10px;
+  border: 1px solid var(--line);
+  text-align: left;
+}
+.day-table th { background: var(--main-light); color: var(--main); }
+
+/* =========================================
+   4. 내 리뷰 - 목록
+   ========================================= */
+.review-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 4px;
+  border-bottom: 1px solid var(--line);
+  color: inherit;
+  text-decoration: none;
+}
+.review-item:hover .review-title { color: var(--main); }
+.review-item img {
+  flex-shrink: 0;
+  width: 72px;
+  height: 56px;
+  border-radius: 8px;
+  object-fit: cover;
+  background: #e5e7eb;
+}
+.review-main { flex: 1; min-width: 0; }
+.review-cat {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: var(--main-light);
+  color: var(--main);
+  font-size: 12px;
+  font-weight: 700;
+}
+.review-title {
+  margin: 5px 0 3px;
+  font-size: 17px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.review-meta {
+  font-size: 13px;
+  color: var(--text-sub);
+}
+.review-meta span { margin-right: 10px; }
+
+
+
+/* =========================================
+   화면 크기별
+   ========================================= */
+@media (max-width: 900px) {
+  .like-grid { grid-template-columns: repeat(3, 1fr); }
+  .detail-grid { grid-template-columns: 1fr; }   /* 상세 박스 세로로 */
+  .summary-boxes { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .mypage-tabs {
+    flex-wrap: wrap;
+    justify-content: center;
+    border-radius: 16px;
+  }
+  .mypage-tab { padding: 8px 12px; font-size: 14px; }
+  .mypage-content { margin: 0 16px 40px; }
+  .panel-banner { padding: 18px 20px; }
+  .panel-banner h3 { font-size: 18px; }
+  .panel-box { padding: 18px; }
+  .like-grid { grid-template-columns: repeat(2, 1fr); }
+  .hide-mobile { display: none; }   /* 휴대폰에서 숨길 표 칸 */
+  .plan-head { flex-wrap: wrap; }
+  .plan-btns { width: 100%; justify-content: flex-end; }
+}
+
+/* 모든 탭 공통 글씨 크기 */
+.rv-table { font-size: 16px; }          /* 여행일정 + 가이드 예약 표 */
+.rv-table th { font-size: 15px; }
+.plan-link { font-size: 17px; font-weight: 700; }
+
+.btn {
+  padding: 8px 14px;
+  font-size: 14px;
+}

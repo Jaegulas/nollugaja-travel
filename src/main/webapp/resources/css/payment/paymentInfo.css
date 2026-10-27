@@ -1,0 +1,93 @@
+/* =========================================================
+주제: 파일 역할
+설명: paymentInfo 화면의 레이아웃, 색상, 크기, 반응형 스타일을 정의
+========================================================= */
+
+/* NOLLEOGAJA · Checkout editorial redesign
+   Only .pi-page is styled. Existing payment IDs, data and JS remain unchanged. */
+.pi-page{--pi-navy:#112e3d;--pi-teal:#006d78;--pi-deep:#004c58;--pi-mint:#e5f5f2;--pi-ink:#1c3343;--pi-muted:#6e8190;--pi-line:#e6edf0;--pi-lav:#f2f4ff;--pi-bg:#f8fafc;box-sizing:border-box;max-width:1320px;width:100%;margin:0 auto;padding:48px 32px 110px;font-family:'Noto Sans KR',sans-serif;color:var(--pi-ink);font-size:14px;line-height:1.6;letter-spacing:-.025em}
+.pi-page *{box-sizing:border-box}
+.pi-page .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 450,'GRAD' 0,'opsz' 24;line-height:1}
+.pi-page-header{margin:0 0 28px;padding:0 3px}
+.pi-page .pi-eyebrow{display:flex;align-items:center;gap:8px;color:#0c7780;font-family:'Plus Jakarta Sans','Noto Sans KR',sans-serif;font-size:11px;font-weight:800;letter-spacing:.14em}
+.pi-page .pi-eyebrow-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#14a39a;box-shadow:0 0 0 5px #dff5ef}
+.pi-page .pi-header-row{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:11px}
+.pi-page .pi-header-row h1{margin:0;font-size:clamp(27px,3vw,37px);font-weight:800;letter-spacing:-.06em;color:#112d3d;line-height:1.25}
+.pi-page .pi-header-row p{margin:9px 0 0;color:#778896;font-size:14px}
+.pi-page .pi-header-mark{width:60px;height:60px;border:1px solid #d9ecea;background:linear-gradient(145deg,#e9faf5,#edf3ff);display:grid;place-items:center;border-radius:19px;color:#087987}
+.pi-page .pi-header-mark i{font-size:30px}
+.pi-page .pi-stepper{position:relative;display:flex;align-items:center;justify-content:space-between;gap:0;background:#fff;border:1px solid #e8edf2;border-radius:22px;padding:26px 40px;margin:0 0 30px;box-shadow:0 12px 36px rgba(19,49,69,.045)}
+.pi-page .pi-step{position:relative;display:flex;align-items:center;flex-direction:column;gap:10px;flex:1;min-width:0;font-size:12px;font-weight:700;color:#94a2b1;white-space:nowrap;z-index:1}
+.pi-page .pi-step:not(:last-child):after{content:'';position:absolute;top:20px;left:calc(50% + 28px);width:calc(100% - 56px);height:2px;background:#e3eaf1;z-index:-1}
+.pi-page .pi-step.done:not(:last-child):after{background:linear-gradient(90deg,#00737d,#20a59e)}
+.pi-page .pi-step-circle{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:#edf1f8;color:#8b9bb0;font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:800}
+.pi-page .pi-step.done .pi-step-circle{background:#006a77;color:white}
+.pi-page .pi-step.active{color:#005f6b}
+.pi-page .pi-step.active .pi-step-circle{background:#006a77;color:#fff;box-shadow:0 0 0 6px #e0f4f3}
+.pi-page .pi-step-circle i{font-size:21px}
+.pi-page .pi-layout{display:grid;grid-template-columns:minmax(0,1.68fr) minmax(350px,1fr);align-items:start;gap:28px}
+.pi-page .pi-left,.pi-page .pi-right{display:flex;flex-direction:column;gap:22px;min-width:0}
+.pi-page .pi-card{background:#fff;border:1px solid #e8edf1;border-radius:23px;padding:30px;box-shadow:0 12px 34px rgba(20,48,68,.045)}
+.pi-page .pi-notice{display:flex;gap:17px;align-items:flex-start;padding:25px 28px;background:linear-gradient(110deg,#e9f7f6 0%,#f0f2ff 95%);border:1px solid #e2eded;border-left:4px solid #087c84;border-radius:19px}
+.pi-page .pi-notice>i{display:grid;place-items:center;flex:none;width:49px;height:49px;padding:11px;border-radius:14px;background:#d4eeec;color:#00747c;font-size:25px}
+.pi-page .pi-notice h2{margin:7px 0 6px;color:#173544;font-size:18px;font-weight:800;letter-spacing:-.045em}
+.pi-page .pi-notice p{margin:0;color:#647d8c;font-size:12px}
+.pi-page .pi-tag{display:inline-flex;align-items:center;align-self:flex-start;padding:5px 10px;border-radius:100px;background:#d8f1e9;color:#006d68;font-size:11px;font-weight:800;line-height:1.3}
+.pi-page .pi-section-kicker{color:#0b858a;font-family:'Plus Jakarta Sans',sans-serif;font-size:10px;letter-spacing:.16em;font-weight:800;margin:0 0 7px}
+.pi-page .pi-heading{display:flex;align-items:center;gap:10px;color:#183344;font-size:19px;font-weight:800;letter-spacing:-.04em;margin:0 0 23px}
+.pi-page .pi-heading i{display:grid;place-items:center;color:#087985;font-size:23px}
+.pi-page .pi-guide{position:relative;display:flex;align-items:center;gap:18px;min-height:138px;padding:21px;background:linear-gradient(115deg,#f1f5ff,#f5f9fd);border:1px solid #e8edfc;border-radius:17px;margin-bottom:17px;overflow:hidden}
+.pi-page .pi-guide:after{content:'';position:absolute;width:130px;height:130px;border-radius:50%;background:rgba(141,211,206,.13);right:-40px;top:-60px;pointer-events:none}
+.pi-page .pi-guide img{width:96px;height:96px;object-fit:cover;border-radius:15px;flex:none;background:#dfe9f0;box-shadow:0 6px 16px rgba(27,63,77,.10)}
+.pi-page .pi-guide h3{margin:9px 0 4px;color:#163345;font-size:21px;font-weight:800;letter-spacing:-.04em}
+.pi-page .pi-guide p{margin:0;color:#708698;font-size:12px;line-height:1.6}
+.pi-page .pi-detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.pi-page .pi-detail{display:flex;gap:13px;align-items:flex-start;min-width:0;min-height:119px;padding:21px 18px;background:#f7f9fd;border:1px solid #f0f2f7;border-radius:16px}
+.pi-page .pi-detail.wide{grid-column:1/-1;min-height:102px}
+.pi-page .pi-detail>i{display:grid;place-items:center;flex:none;width:35px;height:35px;border-radius:11px;background:#e3f4f3;color:#007986;font-size:20px}
+.pi-page .pi-detail>div{min-width:0}
+.pi-page .pi-detail small{display:block;color:#8294a4;font-size:11px;margin:1px 0 5px}
+.pi-page .pi-detail strong{display:block;color:#18374b;font-size:17px;font-weight:800;overflow-wrap:anywhere;line-height:1.4}
+.pi-page .pi-detail span{display:block;color:#8b9aa8;font-size:11px;line-height:1.7;margin-top:7px}
+.pi-page .pi-muted{margin:0 0 17px;color:#75899b;font-size:12px;line-height:1.7}
+.pi-page .pi-methods{display:grid;grid-template-columns:1fr;gap:10px}
+.pi-page .pi-method{display:flex;align-items:center;gap:15px;padding:19px 20px;border:1.5px solid #9bd0cd;border-radius:16px;background:#eff9f8;color:#18374b;cursor:pointer;min-height:82px;transition:border-color .2s,box-shadow .2s,transform .2s}
+.pi-page .pi-method:hover{border-color:#007780;box-shadow:0 7px 18px rgba(0,105,115,.08)}
+.pi-page .pi-method input{accent-color:#007780;width:17px;height:17px;flex:none}
+.pi-page .pi-method>i{font-size:27px;color:#007983}
+.pi-page .pi-method strong{font-size:15px;font-weight:800}
+.pi-page .pi-method small{margin-left:auto;color:#65899a;font-size:11px}
+.pi-page .pi-booking-note{padding:19px 21px;margin-top:18px;background:#f8fafc;border:1px solid #e8edf2;border-radius:15px}
+.pi-page .pi-booking-note h3{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:800;margin:0 0 9px;color:#1c4251}
+.pi-page .pi-booking-note h3 i{font-size:19px;color:#07828a}
+.pi-page .pi-booking-note p{margin:0;font-size:12px;color:#758a9a;line-height:1.8}
+.pi-page .pi-terms{padding:23px 22px;background:#f0f3ff;border-radius:17px;margin-top:18px}
+.pi-page .pi-terms h3{display:flex;align-items:center;gap:9px;margin:0 0 14px;font-size:14px;font-weight:800;color:#19394b}
+.pi-page .pi-terms h3 i{font-size:20px;color:#007b87}
+.pi-page .pi-terms label{display:flex;align-items:flex-start;gap:11px;margin:13px 0;font-size:13px;color:#2b4356;font-weight:600;cursor:pointer;line-height:1.6}
+.pi-page .pi-terms input{width:16px;height:16px;accent-color:#007985;flex:none;margin-top:3px}
+.pi-page .pi-terms p{margin:13px 0 0;color:#8290a4;font-size:11px;line-height:1.7}
+.pi-page .pi-terms a{color:#006e7b;text-decoration:underline;text-underline-offset:3px}
+.pi-page .pi-summary{padding:30px 27px;border-top:4px solid #007b83}
+.pi-page .pi-summary .pi-heading{margin-bottom:23px}
+.pi-page .pi-receipt{padding:23px 22px;background:#f2f4ff;border-radius:17px;margin-bottom:20px}
+.pi-page .pi-receipt>div{display:flex;align-items:center;justify-content:space-between;gap:12px;color:#7b8a9d;font-size:13px;margin-bottom:16px}
+.pi-page .pi-receipt>div strong{color:#2c3d52;font-size:14px;font-weight:800;text-align:right}
+.pi-page .pi-receipt .pi-final{border-top:1px solid #d8e0ed;margin:4px 0 0;padding-top:21px;align-items:center}
+.pi-page .pi-receipt .pi-final strong:first-child{color:#213b4a;font-size:14px}
+.pi-page .pi-receipt .pi-final strong:last-child{font-size:clamp(22px,2.2vw,29px);color:#006a78;letter-spacing:-.055em;white-space:nowrap}
+.pi-page .pi-pay{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;min-height:58px;padding:16px 18px;border:0;border-radius:13px;background:linear-gradient(115deg,#005b67,#007985);color:#fff;font-family:inherit;font-size:15px;font-weight:800;letter-spacing:-.03em;cursor:pointer;box-shadow:0 8px 19px rgba(0,100,113,.18);transition:transform .15s,box-shadow .15s,filter .15s}
+.pi-page .pi-pay:hover{transform:translateY(-2px);filter:brightness(1.06);box-shadow:0 12px 24px rgba(0,100,113,.23)}
+.pi-page .pi-pay:focus-visible,.pi-page .pi-edit:focus-visible,.pi-page .pi-method:focus-within{outline:3px solid #52b5bc;outline-offset:3px}
+.pi-page .pi-pay i{font-size:20px}
+.pi-page .pi-center{text-align:center;margin:12px 0 15px;color:#7e8e9f;font-size:11px}
+.pi-page .pi-edit{display:flex;align-items:center;justify-content:center;gap:8px;color:#006c7b;font-size:13px;font-weight:800;text-decoration:none;padding:11px 5px;border-radius:9px}
+.pi-page .pi-edit:hover{background:#edf7f7}
+.pi-page .pi-edit i{font-size:20px}
+.pi-page .pi-support{display:flex;align-items:flex-start;gap:12px;padding:19px 21px;border:1px solid #e2e8f9;border-radius:16px;background:#eaf0ff;color:#6c8096;font-size:12px;line-height:1.75}
+.pi-page .pi-support i{flex:none;color:#007c88;font-size:21px}
+@media(min-width:1025px){.pi-page .pi-right{position:sticky;top:24px}}
+@media(max-width:1000px){.pi-page{padding:34px 24px 80px}.pi-page .pi-layout{grid-template-columns:minmax(0,1.45fr) minmax(300px,1fr);gap:19px}.pi-page .pi-card{padding:24px}.pi-page .pi-summary{padding:25px 21px}}
+@media(max-width:780px){.pi-page{padding:24px 16px 64px}.pi-page .pi-layout{grid-template-columns:1fr}.pi-page .pi-right{position:static}.pi-page .pi-stepper{padding:21px 10px}.pi-page .pi-header-mark{display:none}.pi-page .pi-card{padding:23px}.pi-page .pi-step{font-size:11px}}
+@media(max-width:480px){.pi-page{padding:22px 12px 50px}.pi-page .pi-header-row h1{font-size:28px}.pi-page .pi-header-row p{font-size:12px}.pi-page .pi-stepper{border-radius:16px;padding:20px 5px}.pi-page .pi-step{font-size:10px;gap:7px}.pi-page .pi-step-circle{width:33px;height:33px;font-size:14px}.pi-page .pi-step:not(:last-child):after{top:16px;left:calc(50% + 21px);width:calc(100% - 42px)}.pi-page .pi-notice{padding:19px 16px;gap:11px}.pi-page .pi-notice>i{width:40px;height:40px;font-size:21px;padding:9px}.pi-page .pi-notice h2{font-size:15px}.pi-page .pi-card{padding:20px 17px;border-radius:17px}.pi-page .pi-guide{padding:14px;gap:12px;min-height:106px}.pi-page .pi-guide img{width:70px;height:70px}.pi-page .pi-guide h3{font-size:16px}.pi-page .pi-detail-grid{grid-template-columns:1fr}.pi-page .pi-detail.wide{grid-column:auto}.pi-page .pi-detail{min-height:0;padding:17px}.pi-page .pi-method{flex-wrap:wrap}.pi-page .pi-method small{margin-left:0}.pi-page .pi-receipt{padding:20px 16px}}
+@media(prefers-reduced-motion:reduce){.pi-page .pi-pay,.pi-page .pi-method{transition:none}.pi-page .pi-pay:hover{transform:none}}

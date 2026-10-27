@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" role="img" aria-labelledby="title desc">
+  <title id="title">숙소 대표 이미지</title>
+  <desc id="desc">밤하늘 아래 따뜻한 조명이 켜진 호텔과 산을 표현한 숙박 테마 일러스트</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#10223c"/>
+      <stop offset="0.55" stop-color="#1e4660"/>
+      <stop offset="1" stop-color="#315f68"/>
+    </linearGradient>
+    <linearGradient id="mount" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#244653"/>
+      <stop offset="1" stop-color="#163744"/>
+    </linearGradient>
+    <linearGradient id="hotel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#203543"/>
+      <stop offset="1" stop-color="#142630"/>
+    </linearGradient>
+    <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#214a45"/>
+      <stop offset="1" stop-color="#102d30"/>
+    </linearGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="10"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="420" fill="url(#sky)"/>
+  <circle cx="664" cy="76" r="34" fill="#f7d89c" opacity=".95"/>
+  <circle cx="664" cy="76" r="52" fill="#f7d89c" opacity=".12" filter="url(#glow)"/>
+
+  <g fill="#d8eef4" opacity=".75">
+    <circle cx="92" cy="62" r="2.2"/><circle cx="152" cy="108" r="1.6"/><circle cx="235" cy="52" r="2"/>
+    <circle cx="321" cy="91" r="1.7"/><circle cx="401" cy="46" r="2.1"/><circle cx="548" cy="96" r="1.5"/>
+    <circle cx="728" cy="128" r="1.8"/><circle cx="598" cy="39" r="1.4"/>
+  </g>
+
+  <path d="M0 236 L112 133 L197 204 L305 105 L398 216 L489 143 L590 225 L682 154 L800 248 L800 420 L0 420 Z" fill="url(#mount)"/>
+  <path d="M0 276 L126 196 L230 258 L345 171 L438 265 L558 195 L670 258 L800 202 L800 420 L0 420 Z" fill="#183b46" opacity=".88"/>
+  <rect y="319" width="800" height="101" fill="url(#ground)"/>
+
+  <g transform="translate(205 154)">
+    <rect x="0" y="70" width="390" height="158" rx="7" fill="url(#hotel)" stroke="#5d8892" stroke-width="3"/>
+    <rect x="44" y="22" width="302" height="63" rx="7" fill="#263f4b" stroke="#668f98" stroke-width="3"/>
+    <rect x="160" y="0" width="70" height="34" rx="5" fill="#2c4c57"/>
+    <path d="M148 70 L195 35 L242 70 Z" fill="#304d56"/>
+
+    <g fill="#f2c879">
+      <rect x="36" y="98" width="44" height="36" rx="4"/>
+      <rect x="103" y="98" width="44" height="36" rx="4"/>
+      <rect x="243" y="98" width="44" height="36" rx="4"/>
+      <rect x="310" y="98" width="44" height="36" rx="4"/>
+      <rect x="36" y="156" width="44" height="36" rx="4"/>
+      <rect x="103" y="156" width="44" height="36" rx="4"/>
+      <rect x="243" y="156" width="44" height="36" rx="4"/>
+      <rect x="310" y="156" width="44" height="36" rx="4"/>
+    </g>
+    <g fill="#ffdda0" opacity=".22" filter="url(#glow)">
+      <rect x="25" y="87" width="66" height="58" rx="10"/>
+      <rect x="232" y="87" width="66" height="58" rx="10"/>
+      <rect x="299" y="145" width="66" height="58" rx="10"/>
+    </g>
+
+    <rect x="163" y="131" width="64" height="97" rx="7" fill="#0d2028" stroke="#567b83" stroke-width="3"/>
+    <rect x="177" y="147" width="36" height="42" rx="3" fill="#d5a85e"/>
+    <circle cx="218" cy="184" r="3" fill="#f3d49a"/>
+    <path d="M144 228 H246 L266 246 H124 Z" fill="#385d5d"/>
+  </g>
+
+  <g fill="#183a35">
+    <circle cx="130" cy="321" r="42"/><rect x="124" y="321" width="12" height="61" fill="#16302e"/>
+    <circle cx="681" cy="324" r="48"/><rect x="675" y="324" width="12" height="62" fill="#16302e"/>
+    <circle cx="75" cy="350" r="33"/><rect x="70" y="350" width="10" height="45" fill="#16302e"/>
+    <circle cx="742" cy="354" r="31"/><rect x="737" y="354" width="10" height="43" fill="#16302e"/>
+  </g>
+
+  <path d="M306 420 C345 370 455 370 494 420 Z" fill="#23494b"/>
+  <path d="M345 420 C371 392 429 392 455 420 Z" fill="#2f5c5d"/>
+</svg>
