@@ -21,6 +21,7 @@
 | Database | MySQL 8.0 |
 | Server | Tomcat 9 · Nginx |
 | Deploy | AWS Lightsail |
+| 배포 주소 | [https://trave2026.kro.kr/travel/](https://trave2026.kro.kr/travel/) (시연 기간 운영) |
 | Collaboration | Git · GitHub · Branch · Pull Request |
 
 ### 🔗 원본 팀 협업 저장소
@@ -241,7 +242,6 @@ WHERE question_id = ?
 # ✨ 전체 주요 기능
 
 ## 👤 회원
-
 - 일반 회원가입 / 로그인
 - 카카오 로그인
 - 아이디 / 비밀번호 찾기
@@ -250,7 +250,6 @@ WHERE question_id = ?
 - 회원 탈퇴 및 개인정보 익명화
 
 ## 🌏 여행지
-
 - 지역별 여행지 조회
 - 키워드 검색
 - 여행지 상세정보
@@ -259,7 +258,6 @@ WHERE question_id = ?
 - 페이지네이션
 
 ## 🏨 숙박
-
 - 지역별 숙소 조회
 - 숙소 검색
 - Kakao Map
@@ -270,7 +268,6 @@ WHERE question_id = ?
 - 이미지 fallback
 
 ## 🍽️ 음식
-
 - TourAPI 위치 기반 맛집 / 관광지 조회
 - Naver Map
 - Naver Local Search
@@ -279,7 +276,6 @@ WHERE question_id = ?
 - 이미지 fallback
 
 ## 🏛️ 문화유산
-
 - 지역 / 검색 / 정렬
 - 페이지네이션
 - 상세정보
@@ -287,7 +283,6 @@ WHERE question_id = ?
 - TourAPI 연동
 
 ## 🧑‍🏫 가이드 · 예약 · 결제
-
 - 가이드 검색
 - 가이드 상세정보
 - 날짜 · 인원 선택
@@ -297,7 +292,6 @@ WHERE question_id = ?
 - 결제 상태 관리
 
 ## 🤖 AI 여행 일정
-
 - 날짜 · 인원 · 지역 · 여행 스타일 입력
 - 일차별 일정 설정
 - OpenRouter 기반 AI 일정 생성
@@ -307,7 +301,6 @@ WHERE question_id = ?
 - 카카오톡 공유
 
 ## ⭐ 리뷰
-
 - 리뷰 CRUD
 - 이미지 저장
 - 댓글
@@ -316,7 +309,6 @@ WHERE question_id = ?
 - 작성자 권한 관리
 
 ## 💬 Q&A
-
 - 질문 / 답변
 - 검색 / 정렬
 - 카테고리
@@ -325,7 +317,6 @@ WHERE question_id = ?
 - CSRF 보호
 
 ## 🌐 공통 기능
-
 - 다국어 번역
 - 날씨
 - WebSocket 실시간 채팅
@@ -359,7 +350,6 @@ JSP / JSON
 # 🛠️ Tech Stack
 
 ### Backend
-
 - Java 21
 - Servlet
 - JSP
@@ -368,25 +358,21 @@ JSP / JSON
 - Gson
 
 ### Frontend
-
 - HTML5
 - CSS3
 - JavaScript
 - Fetch API
 
 ### Database
-
 - MySQL 8.0
 
 ### Server / Deploy
-
 - Apache Tomcat 9
 - Nginx
 - Ubuntu
 - AWS Lightsail
 
 ### Collaboration
-
 - Git
 - GitHub
 - Branch
@@ -415,40 +401,34 @@ JSP / JSON
 
 ## 1. 마이페이지 찜이 0개로 표시되는 문제
 
-### 문제
-
+**문제**  
 DB에는 찜 데이터가 존재했지만 마이페이지에서는 일부 찜이 0개로 표시되었습니다.
 
-### 원인
-
+**원인**  
 로그인 시 사용한 세션 키와 일부 기능에서 조회한 세션 키가 달랐습니다.
 
-### 해결
-
+**해결**  
 회원 식별 세션 키를 `loginId`로 통일했습니다.
 
 ---
 
 ## 2. 외부 API 이미지 누락
 
-### 문제
-
+**문제**  
 외부 API에서 이미지가 없거나 URL 로딩이 실패하면 빈 이미지가 표시되었습니다.
 
-### 해결
-
-음식 종류와 숙박 유형에 맞는 fallback 이미지를 추가하고 이미지 로딩 오류도 처리했습니다.
+**해결**
+- 음식 종류와 숙박 유형에 맞는 fallback 이미지 추가
+- 이미지 로딩 오류 처리
 
 ---
 
 ## 3. 회원 탈퇴 데이터 관계
 
-### 문제
-
+**문제**  
 회원 정보를 물리적으로 삭제하면 기존 리뷰 / Q&A 등의 연결 관계가 깨질 수 있었습니다.
 
-### 해결
-
+**해결**
 - `ACTIVE → WITHDRAWN`
 - `withdrawn_at` 기록
 - 개인정보 익명화
@@ -461,12 +441,10 @@ DB에는 찜 데이터가 존재했지만 마이페이지에서는 일부 찜이
 
 ## 4. API 음식과 DB 찜 연결
 
-### 문제
-
+**문제**  
 TourAPI에서 가져온 음식은 내부 `food_id`가 존재하지 않을 수 있어 바로 찜 관계를 만들 수 없었습니다.
 
-### 해결
-
+**해결**  
 찜 요청 시 음식이 DB에 존재하는지 확인하고, 없다면 등록한 뒤 `food_like`와 연결하는 `find-or-create` 방식을 사용했습니다.
 
 ---
@@ -505,7 +483,6 @@ AWS Credential
 # 🙋 담당 영역 요약
 
 ### 이재준
-
 - 음식 페이지
 - TourAPI 위치 기반 맛집 / 관광지 조회
 - Naver Map / Naver Local Search
